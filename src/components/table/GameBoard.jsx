@@ -18,16 +18,17 @@ import Bubble from '../Bubble';
 import RollList from './RollList';
 import PlayerRack from '../PlayerRack';
 import GameMenu from '../GameMenu';
+import MultiplayerBox from '../MultiplayerBox';
 
-function GameBoard({ player = 'Ziggy', startingBank = 1500, tableMin = 5, tableMax = 5000 }) {
+function GameBoard({ username, privateTable }) {
     //  ************************************************************
     const navigate = useNavigate();
     //  ************************************************************
     const [decreaseBets, setDecreaseBets] = useState(false);
     const [betAmount, setBetAmount] = useState(5);
     const [currentBet, setCurrentBet] = useState(0);
-    const [bankroll, setBankroll] = useState(startingBank);
-    const [rackAmount, setRackAmount] = useState(startingBank);
+    const [bankroll, setBankroll] = useState(0);
+    const [rackAmount, setRackAmount] = useState(0);
     const [shooterProfit, setShooterProfit] = useState(0);
     const [totalNet, setTotalNet] = useState(0);
     //  ************************************************************
@@ -125,6 +126,12 @@ function GameBoard({ player = 'Ziggy', startingBank = 1500, tableMin = 5, tableM
     const [uniquePoints, setUniquePoints] = useState(0);
 
     //  ************************************************************
+    useEffect(() => {
+        if (privateTable) {
+            setBankroll(privateTable.startingBank)
+            setRackAmount(privateTable.startingBank)
+        }
+    }, [])
     //  ************************************************************
     const changeBet = (betLocation, betAmount, decrease, value) => {
 
@@ -2710,8 +2717,14 @@ function GameBoard({ player = 'Ziggy', startingBank = 1500, tableMin = 5, tableM
                     {totalRollCount}
                 </span>
                 <div className='bankroll'>
+                    {privateTable ? <div>
+                        <span className='table-code'>{privateTable.tableId}</span>
+                        <span className='table-code'>{privateTable.startingBank}</span>
+                        <span className='table-code'>{privateTable.tableName}</span>
+                    </div> : null}
+
                     <PlayerRack
-                        player={player}
+                        player={username}
                         shooterProfit={shooterProfit}
                         currentBet={currentBet}
                         rackAmount={rackAmount}
@@ -2721,8 +2734,8 @@ function GameBoard({ player = 'Ziggy', startingBank = 1500, tableMin = 5, tableM
                 </div>
 
                 <div className='menu'>
-                    <GameMenu />
-
+                    {privateTable ? <GameMenu isPrivate={true} /> : <GameMenu isPrivate={false} />}
+                    {privateTable ? <MultiplayerBox isPrivate={true} players={privateTable.users} /> : <MultiplayerBox isPrivate={false} />}
                 </div>
             </div>
         </div>

@@ -12,6 +12,8 @@ import blue4 from '../../assets/Four.png';
 import blue5 from '../../assets/Five.png';
 import blue6 from '../../assets/Six.png';
 
+import '../../components/Table.css'
+
 
 function RollList({ rollList }) {
 
@@ -78,7 +80,7 @@ function RollList({ rollList }) {
                                 <div className='roll-item'>
                                     <img className='left-die' src={leftImage} style={{ height: '25px', width: '25px' }} />
                                     <img className='left-die' src={rightImage} style={{ height: '25px', width: '25px' }} />
-                                    <span>{e[2]}</span>
+                                    <span style={{ height: '25px', width: '25px', marginLeft: '10px' }}>{e[2]}</span>
                                 </div>
                             </li>
                         )

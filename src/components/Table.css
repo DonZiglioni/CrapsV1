@@ -1043,3 +1043,100 @@
     justify-content: center;
     text-align: center;
 }
+
+.table-code {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.game-menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.multiplayer-box {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    height: 90%;
+    width: 75%;
+    margin-left: 30px;
+}
+
+.mp-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 30px;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+}
+
+.mp-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
+
+.mp-tab-selected {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(123, 255, 123, .75);
+    font-weight: bold;
+}
+
+.mp-list {
+    height: 100%;
+    width: 100%;
+}
+
+.rank-list {
+    background-color: red;
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+
+.shooters-list {
+    background-color: blue;
+    height: 100%;
+    width: 100%;
+}
+
+.player-rank {
+    list-style: upper-roman;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: aliceblue;
+    padding: 3px;
+}
+
+ol {
+    padding: 0;
+
+}
+
+.roll-list-container {
+    background-color: violet;
+    height: 90%;
+    overflow-y: scroll;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}

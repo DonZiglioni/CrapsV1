@@ -8,6 +8,59 @@
     align-items: center;
 }
 
+.welcome-container {
+    height: 100vh;
+    width: 100%;
+    background-color: rgb(1, 144, 96);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome-menu {
+    position: relative;
+    padding-right: 200px;
+    padding-left: 200px;
+    height: 100%;
+    width: 500px;
+    background-color: rgb(1, 144, 96);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    border: 2px solid black
+}
+
+.unauthorized {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    width: 100%;
+    background-color: gray;
+}
+
+.authorized {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.user-stats {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    height: 100%;
+}
+
+.user-buttons {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    height: 100%;
+}
+
 .bubble-container {
     height: 100%;
     width: 100%;
@@ -27,4 +80,172 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(1, 144, 96);
+    height: 100vh;
+
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    height: 200px;
+    width: 60%;
+    position: absolute;
+    bottom: 0;
+    padding-top: 100px;
+    padding-bottom: 50px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.signup-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(1, 144, 96);
+    height: 100vh;
+
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    height: 150px;
+    width: 60%;
+    position: absolute;
+    bottom: 0;
+    padding-top: 100px;
+    padding-bottom: 50px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.input {
+    width: 55%;
+    height: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    border-radius: 8px;
+    padding-left: 5px;
+}
+
+.button {
+    width: 85%;
+    height: 35px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+.button2 {
+    width: 200px;
+    height: 35px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    position: relative;
+    margin-top: 5px;
+}
+
+.PYBText {
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.back-button {
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    border-radius: 2px;
+    height: 50px;
+    width: 50px;
+    background-color: rgb(169, 0, 0);
+    line-height: 1;
+}
+
+.create-table {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, .8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.radioButton {
+    border-radius: 24px;
+    border: 2px solid #007BFF;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: background-color 1s, color 1s;
+}
+
+.selected {
+    background-color: #004ea0;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: background-color .3s, color .3s;
+    border-color: "#007BFF";
+    color: white;
+}
+
+.list {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+.table-options {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 2fr;
+    padding-left: 25px;
+    padding-right: 25px;
 }
