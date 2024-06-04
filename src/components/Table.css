@@ -1136,7 +1136,19 @@ ol {
     overflow-y: scroll;
     width: 90%;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+
+}
+
+.roll-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     justify-content: center;
+    width: 100%;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    text-align: right;
 
 }

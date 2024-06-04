@@ -12,7 +12,7 @@ import blue4 from '../assets/Four.png'
 import blue5 from '../assets/Five.png'
 import blue6 from '../assets/Six.png'
 
-function Bubble({ left, right, rollDice }) {
+function Bubble({ left, right, rollDice, startDice, stopDice, rollTimer }) {
     let leftImage;
     let rightImage;
 
@@ -61,14 +61,16 @@ function Bubble({ left, right, rollDice }) {
             break;
     }
 
-
     return (
         <div className='bubble-container'>
             <div className='dice-container'>
                 <img className='left-die' src={leftImage} style={{ height: '50px', width: '50px' }} />
                 <img className='left-die' src={rightImage} style={{ height: '50px', width: '50px' }} />
             </div>
+            <span>{rollTimer}</span>
             <button onClick={() => rollDice()}>ROLL</button>
+            <button onClick={() => startDice()}>START</button>
+            <button onClick={() => stopDice()}>STOP</button>
         </div>
     )
 }

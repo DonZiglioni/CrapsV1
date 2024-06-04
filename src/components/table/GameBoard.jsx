@@ -16,11 +16,12 @@ import '../../components/Table.css';
 
 import Bubble from '../Bubble';
 import RollList from './RollList';
+import PrivateRollList from './PrivateRollList';
 import PlayerRack from '../PlayerRack';
 import GameMenu from '../GameMenu';
 import MultiplayerBox from '../MultiplayerBox';
 
-function GameBoard({ username, privateTable }) {
+function GameBoard({ username, userId, privateTable, isPublic, updateDbRolls, adjustBankroll }) {
     //  ************************************************************
     const navigate = useNavigate();
     //  ************************************************************
@@ -115,6 +116,8 @@ function GameBoard({ username, privateTable }) {
     const [leftDie, setLeftDie] = useState(null);
     const [rightDie, setRightDie] = useState(null);
     const [rollList, setRollList] = useState([]);
+    const [privateRollList, setPrivateRollList] = useState([]);
+    const [rollTimer, setRollTimer] = useState(20);
     //  ************************************************************
     const [shooter, setShooter] = useState(1);
     const [rollCount, setRollCount] = useState(0);
@@ -128,8 +131,22 @@ function GameBoard({ username, privateTable }) {
     //  ************************************************************
     useEffect(() => {
         if (privateTable) {
-            setBankroll(privateTable.startingBank)
-            setRackAmount(privateTable.startingBank)
+            let currentUser;
+            for (let i = 0; i < privateTable.users.length; i++) {
+                if (privateTable.users[i].user_id === userId) {
+                    currentUser = privateTable.users[i];
+                    console.log("FOUND", currentUser);
+                    setBankroll(currentUser.bankroll);
+                    setRackAmount(currentUser.bankroll);
+                }
+
+            }
+            // setBankroll(privateTable.startingBank);
+            //setRackAmount(privateTable.startingBank);
+            setPrivateRollList(privateTable.rolls);
+        } else {
+            setBankroll(1500);
+            setRackAmount(1500);
         }
     }, [])
     //  ************************************************************
@@ -147,6 +164,9 @@ function GameBoard({ username, privateTable }) {
         }
         switch (betLocation) {
             case "pass":
+                if (rollCount !== 0) {
+                    return;
+                }
                 if (decrease) {
                     setPassBet(passBet - betAmount);
                     setCurrentBet(currentBet - betAmount);
@@ -173,6 +193,9 @@ function GameBoard({ username, privateTable }) {
 
                 break;
             case "dontpass":
+                if (rollCount !== 0) {
+                    return;
+                }
                 if (decrease) {
                     setDontpassBet(dontpassBet - betAmount)
                     setCurrentBet(currentBet - betAmount);
@@ -1288,6 +1311,7 @@ function GameBoard({ username, privateTable }) {
         console.log(`Win $${calculate}`);
         setRackAmount(rackAmount + parseInt(calculate))
         setWinAmount([parseInt(calculate), bet[0]])
+        //adjustBankroll(calculate)
         setTimeout(() => {
             setIsWinner(false)
         }, 1000);
@@ -1299,6 +1323,7 @@ function GameBoard({ username, privateTable }) {
         const wager = bet[2];
         //setBankroll(bankroll - wager);
         setCurrentBet(currentBet - wager);
+        //adjustBankroll(wager)
         clearBet(bet[0])
     }
     //  ************************************************************
@@ -1610,6 +1635,7 @@ function GameBoard({ username, privateTable }) {
                         })
                     }
                     setBankroll(bankroll + tempBankroll);
+                    adjustBankroll(tempBankroll);
                     setTotalRollCount(totalRollCount + 1);
                     break;
                 case 3:
@@ -1628,6 +1654,7 @@ function GameBoard({ username, privateTable }) {
                         })
                     }
                     setBankroll(bankroll + tempBankroll);
+                    adjustBankroll(tempBankroll);
                     setTotalRollCount(totalRollCount + 1);
                     break;
                 case 4:
@@ -1655,6 +1682,7 @@ function GameBoard({ username, privateTable }) {
                     setPoint(roll);
                     setRollCount(rollCount + 1);
                     setBankroll(bankroll + tempBankroll);
+                    adjustBankroll(tempBankroll);
                     setTotalRollCount(totalRollCount + 1);
                     break;
                 case 5:
@@ -1692,6 +1720,7 @@ function GameBoard({ username, privateTable }) {
                     setPoint(roll);
                     setRollCount(rollCount + 1);
                     setBankroll(bankroll + tempBankroll);
+                    adjustBankroll(tempBankroll);
                     setTotalRollCount(totalRollCount + 1);
                     break;
                 case 6:
@@ -1738,6 +1767,7 @@ function GameBoard({ username, privateTable }) {
                     setPoint(roll);
                     setRollCount(rollCount + 1);
                     setBankroll(bankroll + tempBankroll);
+                    adjustBankroll(tempBankroll);
                     setTotalRollCount(totalRollCount + 1);
                     break;
                 case 7:
@@ -1778,6 +1808,8 @@ function GameBoard({ username, privateTable }) {
                         })
                     }
                     setBankroll(bankroll + tempBankroll);
+                    adjustBankroll(tempBankroll);
+                    adjustBankroll(tempBankroll);
                     setTotalRollCount(totalRollCount + 1);
                     break;
                 case 8:
@@ -1815,6 +1847,7 @@ function GameBoard({ username, privateTable }) {
                     setPoint(roll);
                     setRollCount(rollCount + 1);
                     setBankroll(bankroll + tempBankroll);
+                    adjustBankroll(tempBankroll);
                     setTotalRollCount(totalRollCount + 1);
                     break;
                 case 9:
@@ -1842,6 +1875,7 @@ function GameBoard({ username, privateTable }) {
                     setPoint(roll);
                     setRollCount(rollCount + 1);
                     setBankroll(bankroll + tempBankroll);
+                    adjustBankroll(tempBankroll);
                     setTotalRollCount(totalRollCount + 1);
                     break;
                 case 10:
@@ -1869,6 +1903,7 @@ function GameBoard({ username, privateTable }) {
                     setPoint(roll);
                     setRollCount(rollCount + 1);
                     setBankroll(bankroll + tempBankroll);
+                    adjustBankroll(tempBankroll);
                     setTotalRollCount(totalRollCount + 1);
                     break;
                 case 11:
@@ -1884,6 +1919,7 @@ function GameBoard({ username, privateTable }) {
                         })
                     }
                     setBankroll(bankroll + tempBankroll);
+                    adjustBankroll(tempBankroll);
                     setTotalRollCount(totalRollCount + 1);
                     break;
                 case 12:
@@ -1899,6 +1935,7 @@ function GameBoard({ username, privateTable }) {
                         })
                     }
                     setBankroll(bankroll + tempBankroll);
+                    adjustBankroll(tempBankroll);
                     setTotalRollCount(totalRollCount + 1);
                     break;
                 default:
@@ -1912,6 +1949,10 @@ function GameBoard({ username, privateTable }) {
                         if (e[0] === 'passBet' || e[0] === 'passOddsBet') {
                             const profit = settleBetWin(e);
                             tempBankroll = tempBankroll + profit;
+                            if (e[0] === 'passOddsBet') {
+                                setCurrentBet(currentBet - passOddsBet);
+                                setPassOddsBet(0);
+                            }
                         } else if (e[0] === 'dontpassBet' || e[0] === 'dontpassOddsBet') {
                             settleBetLoss(e)
                             tempBankroll = tempBankroll - e[2];
@@ -2103,6 +2144,7 @@ function GameBoard({ username, privateTable }) {
                 setPoint(0);
                 setRollCount(rollCount + 1);
                 setBankroll(bankroll + tempBankroll);
+                adjustBankroll(tempBankroll);
                 setTotalRollCount(totalRollCount + 1);
                 setUniquePoints(uniquePoints + 1);
             } else if (roll === 7) {
@@ -2144,6 +2186,7 @@ function GameBoard({ username, privateTable }) {
                 setPoint(0);
                 setRollCount(0);
                 setBankroll(bankroll + tempBankroll);
+                adjustBankroll(tempBankroll);
                 setCurrentBet(0);
                 setTotalRollCount(totalRollCount + 1);
                 setUniquePoints(0);
@@ -2417,7 +2460,9 @@ function GameBoard({ username, privateTable }) {
         }
     }
     //  ************************************************************
-    const rollDice = () => {
+
+    //  ************************************************************
+    const rollDice = async () => {
         let left = Math.floor(Math.random() * 6) + 1;
         let right = Math.floor(Math.random() * 6) + 1;
         setLeftDie(left);
@@ -2426,6 +2471,40 @@ function GameBoard({ username, privateTable }) {
         checkRoll(left + right, left, right);
         setTotalRollCount(totalRollCount + 1);
         setRollList([...rollList, total]);
+        let res = await updateDbRolls(left, right, left + right);
+        console.log('res', res);
+        setPrivateRollList(res.rolls);
+    }
+    //  ************************************************************
+
+    // const startTimer = () => {
+    //     console.log('timer');
+    //     for (let i = 0; i < 20; i++) {
+    //         setRollTimer(rollTimer - 1)
+    //         console.log("In Loop", i);
+    //         if (rollTimer === 0) {
+    //             console.log("done");
+    //         }
+    //     }
+    // }
+    // let intervalId;
+    const startDice = () => {
+        setRollTimer(20);
+        // startTimer();
+        // // intervalId = setInterval(() => {
+
+        // //     let left = Math.floor(Math.random() * 6) + 1;
+        // //     let right = Math.floor(Math.random() * 6) + 1;
+        // //     setLeftDie(left);
+        // //     setRightDie(right);
+        // //     let total = [left, right, left + right];
+        // //     checkRoll(left + right, left, right);
+        // //     setTotalRollCount(totalRollCount + 1);
+        // //     setRollList([...rollList, total]);
+        // // }, 20000);
+    }
+    const stopDice = () => {
+        setRollTimer(null)
     }
     //  ************************************************************
     const betsDown = () => {
@@ -2517,10 +2596,14 @@ function GameBoard({ username, privateTable }) {
         <div className='main-container'>
             <div className='left-side'>
                 <div className='bubble'>
-                    <Bubble left={leftDie} right={rightDie} rollDice={rollDice} />
+                    <Bubble left={leftDie} right={rightDie} rollDice={rollDice} startDice={startDice} stopDice={stopDice} rollTimer={rollTimer} />
                 </div>
                 <div className='rolls'>
-                    <RollList rollList={rollList} />
+                    {privateTable ?
+                        <PrivateRollList rollList={privateRollList} />
+                        :
+                        <RollList rollList={rollList} />
+                    }
                 </div>
             </div>
             <div className='game-board'>

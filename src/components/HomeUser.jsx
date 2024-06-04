@@ -17,7 +17,7 @@ function HomeUser() {
     const [tableCode, setTableCode] = useState('');
     const [tableMin, setTableMin] = useState(5);
     const [tableMax, setTableMax] = useState(2000);
-    const [tableBankroll, setTableBankroll] = useState(1500);
+    const [tableBankroll, setTableBankroll] = useState();
     const [publicBankroll, setPublicBankroll] = useState(0);
     const [tableId, setTableId] = useState('');
     const [selectedValue, setSelectedValue] = useState(null);
@@ -41,6 +41,7 @@ function HomeUser() {
             alert('Please enter a table name')
         }
         setTableId(randomTableId());
+        let startingBank = parseInt(tableBankroll)
         try {
             const promise = await databases.createDocument(
                 DATABASE_ID,
@@ -51,12 +52,14 @@ function HomeUser() {
                     'tableId': tableId,
                     'tableMin': tableMin,
                     'tableMax': tableMax,
+                    'startingBank': startingBank,
                     'users': [
                         { username: user.name, user_id: user.$id, bankroll: parseInt(tableBankroll) }
                     ],
                 }
             );
-            navigate('/userTable/')
+            console.log(promise);
+            navigate(`/userTable/${promise.$id}`)
         } catch (error) {
             console.log(error);
         }
@@ -90,8 +93,8 @@ function HomeUser() {
                 ]
             );
             if (promise.total > 0) {
-                let found = false;
                 table = promise.documents[0];
+                let found = false;
                 for (let i = 0; i < table.users.length; i++) {
                     if (table.users[i].user_id === user.$id) {
                         found = true;
@@ -130,7 +133,7 @@ function HomeUser() {
 
     useEffect(() => {
         getSavedTables();
-
+        setTableId(randomTableId());
     }, [])
 
     return (

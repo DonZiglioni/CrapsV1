@@ -4,7 +4,7 @@ import GameBoard from './table/GameBoard';
 function PublicGame() {
     return (
         <div>
-            <GameBoard />
+            <GameBoard isPublic={true} />
         </div>
     )
 }
